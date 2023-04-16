@@ -1,15 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ ¿Recuerdas las variables que creaste en el ejercicio anterior? Ahora deberás
+asignarles un valor.
+
  */
-package guia_p1;
+package java_intro_p1;
 
 /**
  *
  * @author Seba
  */
-public class Ejercicio_2 {
+public class Guia_Ejercicio_2 {
 
     /**
      * @param args the command line arguments
@@ -19,7 +19,7 @@ public class Ejercicio_2 {
         double decimales = 3.14;
         boolean siOno = true;
         String cadena = "Asignación de variables, ejercicio 2";
-        char caracter = S;
+        //char caracter = $;
         long enteroGrande = 1235465487;
         
         //Detección de errores    

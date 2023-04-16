@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Define variables donde puedas alojar los resultados y prueba usar dos
+operadores de cada tipo
  */
-package guia_p1;
+package java_intro_p1;
 
 /**
  *
  * @author Seba
  */
-public class Ejercicio_3 {
+public class Guia_Ejercicio_3 {
 
     /**
      * @param args the command line arguments

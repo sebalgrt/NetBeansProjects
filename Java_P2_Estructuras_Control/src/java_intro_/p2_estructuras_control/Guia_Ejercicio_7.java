@@ -14,7 +14,7 @@ una bomba de pasta alimenticia”.
 o Si no se cumple ninguno de los valores anteriores mostrar el mensaje
 “No existe un valor válido para tipo de bomba”
  */
-package guia_p2;
+package java_intro_.p2_estructuras_control;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ import java.util.Scanner;
  *
  * @author Seba
  */
-public class Ejercicio_7 {
+public class Guia_Ejercicio_7 {
 
     /**
      * @param args the command line arguments

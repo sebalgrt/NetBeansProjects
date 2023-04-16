@@ -5,7 +5,7 @@ programa deberá calcular y mostrar el resultado de la suma de los números
 leídos, pero si el número es negativo no debe sumarse. Nota: recordar el uso
 de la sentencia break.
  */
-package guia_p2;
+package java_intro_.p2_estructuras_control;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author Seba
  */
-public class Ejercicio_9 {
+public class Guia_Ejercicio_9 {
 
     /**
      * @param args the command line arguments

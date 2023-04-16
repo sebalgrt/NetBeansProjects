@@ -7,7 +7,7 @@ ejemplo:
 11 ***********
 2 *
  */
-package guia_p2;
+package java_intro_.p2_estructuras_control;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author Seba
  */
-public class Ejercicio_10 {
+public class Guia_Ejercicio_10 {
 
     /**
      * @param args the command line arguments

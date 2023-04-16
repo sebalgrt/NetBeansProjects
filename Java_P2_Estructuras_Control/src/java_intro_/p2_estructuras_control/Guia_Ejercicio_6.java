@@ -2,7 +2,7 @@
  Implementar un programa que le pida dos números enteros al usuario y
 determine si ambos o alguno de ellos es mayor a 25.
  */
-package guia_p2;
+package java_intro_.p2_estructuras_control;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Seba
  */
-public class Ejercicio_6 {
+public class Guia_Ejercicio_6 {
 
     /**
      * @param args the command line arguments
@@ -23,9 +23,9 @@ public class Ejercicio_6 {
         System.out.print("Ingrese otro número: ");
         num2 = leer.nextInt();
         
-        if (num1 > 25 && num2 > 25) {;
+        if (num1 > 25 && num2 > 25) {
         System.out.println("Ambos números son mayores a 25");
-        }else { ;
+        }else { 
         System.out.println("Alguno de los números es menor a 25");
         }
             

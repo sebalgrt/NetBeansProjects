@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Crear un proyecto de Java y definir al menos 6 variables en tu IDE de distintos
+tipos de datos.
  */
-package guia_p1;
+package java_intro_p1;
 
 /**
  *
  * @author Seba
  */
-public class Ejercicio_1 {
+public class Guia_Ejercicio_1 {
 
     /**
      * @param args the command line arguments

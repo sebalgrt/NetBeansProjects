@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Define una variable que aloje tu nombre y otra que guarde tu edad. Imprime
+ambas variables por pantalla.
  */
-package guia_p1;
+package java_intro_p1;
 
 /**
  *
  * @author Seba
  */
-public class Ejercicio_4 {
+public class Guia_Ejercicio_4 {
 
     /**
      * @param args the command line arguments
