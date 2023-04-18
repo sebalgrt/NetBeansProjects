@@ -30,9 +30,9 @@ public class Extra_4 {
         int ok = 0, not = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
-                if (j == 5) {
-                    matriz[i][5] = (matriz[i][0] * 0.10) + (matriz[i][1] * 0.15) + (matriz[i][2] * 0.25) + (matriz[i][3] * 0.50);
-                    if (matriz[i][5] >= 7) {
+                if (j == 4) {
+                    matriz[i][4] = (matriz[i][0] * 0.10) + (matriz[i][1] * 0.15) + (matriz[i][2] * 0.25) + (matriz[i][3] * 0.50);
+                    if (matriz[i][4] >= 7.0) {
                         ok ++;
                     }else {
                         not++;
@@ -42,6 +42,7 @@ public class Extra_4 {
                 }
             }
         }
+        
         System.out.println("La cantidad de alumnos APROBADOS es: " + ok);
         System.out.println("La cantidad de alumnos DESAPROBADOS es: " + not);
         System.out.println("");
