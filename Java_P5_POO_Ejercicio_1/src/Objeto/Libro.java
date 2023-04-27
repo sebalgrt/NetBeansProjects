@@ -5,6 +5,8 @@
  */
 package Objeto;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Lichi y Fran
@@ -25,6 +27,24 @@ public class Libro {
         this.paginas = paginas;
     }
 
+    public void cargarLibro(){
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        System.out.print("Ingrese titulo: ");
+        this.nombre = leer.nextLine();
+        System.out.print("Ingrese autor: ");
+        this.autor = leer.nextLine();
+        System.out.print("Ingrese ISBN: ");
+        this.isbn = leer.nextInt();
+        System.out.print("Ingrese cantidad de páginas: ");
+        this.paginas = leer.nextInt();
+    }
+    
+    public void mostrarLibro() {
+        System.out.println("Titulo: " + this.nombre);
+        System.out.println("Autor: " + this.autor);
+        System.out.println("ISBN: " + this.isbn);
+        System.out.println("Cantidad de páginas: " + this.paginas);
+    }
 }
 
 

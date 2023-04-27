@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Crear una clase llamada Libro que contenga los siguientes atributos:
+ISBN, Título, Autor, Número de páginas, y un constructor con todos los
+atributos pasados por parámetro y un constructor vacío. Crear un
+método para cargar un libro pidiendo los datos al usuario y luego
+informar mediante otro método el número de ISBN, el título, el autor del
+libro y el número de páginas.
+
  */
 package java_p5_poo_ejercicio_1;
 
@@ -18,7 +22,6 @@ public class Java_P5_POO_Ejercicio_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
         
         //INSTACIACION CONSTRUCTOR VACIO
         Libro libroVacio = new Libro();
@@ -26,27 +29,17 @@ public class Java_P5_POO_Ejercicio_1 {
         //INSTANCIACION CONSTRUCTOR POR PARAMENTROS
         Libro libroParametros = new Libro(123456, "El Cuco", "Seba", 48);
         
-        //INSTANCIACIÓN A PEDIDO
-        Libro libroUser = new Libro();
-        System.out.print("Ingrese número ISBN: ");
-        libroUser.isbn = leer.nextInt();
-        System.out.print("Ingrese titulo; ");
-        libroUser.nombre = leer.next();
-        System.out.print("Ingrese autor: ");
-        libroUser.autor = leer.next();
-        System.out.print("Ingrese cantidad de paginas: ");
-        libroUser.paginas = leer.nextInt();
-        System.out.println("POR PARAMETROS");
-        System.out.println("ISBN: " + libroParametros.isbn);
-        System.out.println("Titulo: " + libroParametros.nombre);
-        System.out.println("Autor: " + libroParametros.autor);
-        System.out.println("Cantidad de páginas: " + libroParametros.paginas);
-        System.out.println("");
-        System.out.println("POR TECLADO");
-        System.out.println("ISBN: " + libroUser.isbn);
-        System.out.println("Titulo: " + libroUser.nombre);
-        System.out.println("Autor: " + libroUser.autor);
-        System.out.println("Cantidad de páginas: " + libroUser.paginas);
+        //MOSTRAR DATOS
+        libroParametros.mostrarLibro();
+        
+        //INSTANCIACIÓN CARGA POR TECLADO        
+        libroVacio.cargarLibro();
+        
+        //MOSTRAR DATOS
+        libroVacio.mostrarLibro();
+        
+        
+
     }
     
 }
