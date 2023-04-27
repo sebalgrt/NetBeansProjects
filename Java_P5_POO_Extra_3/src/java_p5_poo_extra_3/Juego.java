@@ -19,29 +19,46 @@ import java.util.Scanner;
 public class Juego {
     public int numero;
 
+    public Juego() {
+    }
+
     public Juego(int numero) {
         this.numero = numero;
     }
     
-    public boolean iniciarJuego() {
+    public void iniciarJuego() {
         Scanner leer = new Scanner(System.in);
         boolean win = false;
-        for (int i = 0; i < 3; i++) {
-            System.out.print("Que número es?: ");
-            int num2 = leer.nextInt();
-            if (this.numero == num2) {
-                System.out.println("CORRECTO!!!");
-                win = true;
-                break;
-            }else if (this.numero < num2) {
-                System.out.println("INCORRECTO... el número es mas bajo");
-                System.out.println("Le quedan " + (2 - i) + " intentos");
-            }else {
-                System.out.println("INCORRECTO... el número es mas alto");
-                System.out.println("Le quedan " + (2 - i) + " intentos");
-            }
-        }
-        return win;
+        String rta;
+        int cont = 0, ok = 0;
+            do {
+            cont++;
+            System.out.print("Ingrese número a adivinar: ");
+            numero = leer.nextInt();
+                for (int i = 0; i < 2; i++) {
+                    System.out.print("Que número es?: ");
+                    int num2 = leer.nextInt();
+                    if (this.numero == num2) {
+                        System.out.println("CORRECTO!!!");
+                        win = true;
+                        ok++;
+                        break;
+                    }else if (this.numero < num2) {
+                        System.out.println("INCORRECTO... el número es mas bajo");
+                        System.out.println("Le quedan " + (1 - i) + " intentos");
+                    }else {
+                        System.out.println("INCORRECTO... el número es mas alto");
+                        System.out.println("Le quedan " + (1 - i) + " intentos");
+                    }
+                }
+                System.out.print("Sigue jugando? (S/N): ");
+                rta = leer.next();
+            } while (rta.equalsIgnoreCase("S"));
+        
+        System.out.println("Jugados: " + cont);
+        System.out.println("Ganados: " + ok);
+        System.out.println("Perdidios: " + (cont - ok));
     }
-    
 }
+
+

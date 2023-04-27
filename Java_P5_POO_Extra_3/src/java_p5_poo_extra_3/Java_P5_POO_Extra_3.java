@@ -22,23 +22,8 @@ public class Java_P5_POO_Extra_3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
-        String rta;
-        int cont = 0, ok = 0;
-        do {
-            cont++;
-            System.out.print("Ingrese número a adivinar: ");
-            Juego num1 = new Juego(leer.nextInt());
-            num1.iniciarJuego();
-            if (num1.iniciarJuego() == true) {
-                ok++;
-            }
-            System.out.print("Seguir jugando? (S/N): ");
-            rta = leer.next();
-        } while (rta.equalsIgnoreCase("S"));
-        System.out.println("Jugados: " + cont);
-        System.out.println("Ganados: " + ok);
-        System.out.println("Perdidios: " + (cont - ok));
+        Juego num1 = new Juego();
+        num1.iniciarJuego();
     }
     
 }
