@@ -16,7 +16,7 @@ public class Java_P5_POO_Extras_6 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Rectangulo rectangulo1 = new Rectangulo();
+        Rectangulo rectangulo1 = new Rectangulo(4 ,6);
         rectangulo1.calcularArea();
     }
     

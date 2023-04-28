@@ -25,11 +25,11 @@ public class Rectangulo {
     }
     
     public void calcularArea() {
-        Scanner leer = new Scanner(System.in);
-        System.out.print("Ingrese lado 1: ");
-        lado1 = leer.nextInt();
-        System.out.print("Ingrese lado 2: ");
-        lado2 = leer.nextInt();
+//        Scanner leer = new Scanner(System.in);
+//        System.out.print("Ingrese lado 1: ");
+//        lado1 = leer.nextInt();
+//        System.out.print("Ingrese lado 2: ");
+//        lado2 = leer.nextInt();
         System.out.println("El area es: " + (lado1 * lado2));
     }
     
