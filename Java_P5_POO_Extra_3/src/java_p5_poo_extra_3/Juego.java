@@ -28,7 +28,6 @@ public class Juego {
     
     public void iniciarJuego() {
         Scanner leer = new Scanner(System.in);
-        boolean win = false;
         String rta;
         int cont = 0, ok = 0;
             do {
@@ -40,7 +39,6 @@ public class Juego {
                     int num2 = leer.nextInt();
                     if (this.numero == num2) {
                         System.out.println("CORRECTO!!!");
-                        win = true;
                         ok++;
                         break;
                     }else if (this.numero < num2) {
