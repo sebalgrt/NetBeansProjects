@@ -17,15 +17,15 @@ e) Método consultarSaldo: permitirá consultar el saldo disponible en la
 cuenta.
 f) Método consultarDatos: permitirá mostrar todos los datos de la
 cuenta.
-
  */
 package java_p6_pooservicio_ejercicio_1;
 
-import SERVICIO.CuentaBancariaServicio;
+import SERVIVIOS.CuentaBancariaServicio;
+import java.util.Scanner;
 
 /**
  *
- * @author Seba
+ * @author recepcal
  */
 public class Java_P6_POOServicio_Ejercicio_1 {
 
@@ -33,9 +33,39 @@ public class Java_P6_POOServicio_Ejercicio_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CuentaBancariaServicio nueva = new CuentaBancariaServicio();
-        nueva.CrearCuenta();
-        nueva.Retirar();
+        Scanner leer = new Scanner(System.in);
+        CuentaBancariaServicio nuevo = new CuentaBancariaServicio();
+        nuevo.CrearCuenta();
+        int op;
+        do {
+            System.out.println("");
+            System.out.println("MENU:");
+            System.out.println("1- INGRESAR DINERO");
+            System.out.println("2- EXTRAER DINERO");
+            System.out.println("3- EXTRACCIÓN RÁPIDA (20%)");
+            System.out.println("4- CONSULTA DE SALDO");
+            System.out.println("5- CONSULTA DE DATOS");
+            System.out.println("6- SALIR");
+            System.out.print("Elija una opción: ");
+            op = leer.nextInt();
+            System.out.println("");
+            switch(op) {
+                case 1: nuevo.Ingresar();
+                break;
+                case 2: nuevo.Retirar();
+                break;
+                case 3: nuevo.ExtraccionRapida();
+                break;
+                case 4: nuevo.ConsultarSaldo();
+                break;
+                case 5: nuevo.ConsultarDatos();
+                break;
+                case 6: System.out.println("ADIOS!!!");
+                break;
+                default: System.out.println("Opción incorrecta");
+            }
+        } while (op != 6);
+
     }
     
 }
