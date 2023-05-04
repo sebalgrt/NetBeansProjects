@@ -27,6 +27,9 @@ el signo delante de -b
  */
 package java_p6_pooservicio_extra_1;
 
+import Servicios.RaicesServicios;
+import java.util.Scanner;
+
 /**
  *
  * @author Seba
@@ -37,7 +40,15 @@ public class Java_P6_POOServicio_Extra_1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner leer = new Scanner(System.in);
+        RaicesServicios raiz = new RaicesServicios();
+        raiz.getDiscriminante();
+        raiz.tieneRaices();
+        raiz.tieneRaiz();
+        raiz.obtenerRaices();
+        raiz.obtenerRaiz();
+        raiz.calcular();
+        
     }
     
 }
