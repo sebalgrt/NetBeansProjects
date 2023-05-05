@@ -5,7 +5,6 @@
  */
 package java_p6_pooservivio_ejercicio_guia;
 
-import Entidad.Persona;
 import Servicio.PersonaService;
 
 /**

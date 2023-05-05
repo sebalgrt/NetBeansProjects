@@ -27,6 +27,4 @@ public class NifServicio {
     public void mostrar() {
         System.out.println("NIF: " + nuevo.getDni() + "-" + nuevo.getUnif());
     }
-    
-    
 }
