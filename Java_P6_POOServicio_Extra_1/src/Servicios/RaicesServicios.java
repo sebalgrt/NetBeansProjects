@@ -15,7 +15,7 @@ import Entidades.Raices;
  * @author Seba
  */
 public class RaicesServicios {
-    Raices r1 = new Raices(2, 4, -1);
+    Raices r1 = new Raices(1, 5, 1);
     
 //a) Método getDiscriminante(): devuelve el valor del discriminante
 //(double). El discriminante tiene la siguiente fórmula: (b^2)-4*a*c
