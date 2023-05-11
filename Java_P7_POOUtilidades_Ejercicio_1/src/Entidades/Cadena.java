@@ -7,11 +7,11 @@ package Entidades;
 
 /**
  *
- * @author Seba
+ * @author recepcal
  */
 public class Cadena {
     private String frase;
-    private int longitud;
+    private int largo;
 
     public Cadena() {
     }
@@ -28,12 +28,11 @@ public class Cadena {
         this.frase = frase;
     }
 
-    public int getLongitud() {
-        return longitud;
+    public int getLargo() {
+        return largo;
     }
 
-    public void setLongitud(int longitud) {
-        this.longitud = longitud;
+    public void setLargo(int largo) {
+        this.largo = largo;
     }
-    
 }
