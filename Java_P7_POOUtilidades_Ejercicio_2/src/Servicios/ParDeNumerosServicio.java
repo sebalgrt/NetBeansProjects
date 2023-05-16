@@ -24,13 +24,7 @@ public class ParDeNumerosServicio {
 //Método devolverMayor para retornar cuál de los dos atributos tiene
 //el mayor valor
     public double devolverMayor() {
-        double mayor;
-        if (par.getN1() > par.getN2()) {
-            mayor = par.getN1();
-        }else {
-             mayor = par.getN2();
-        }
-        return mayor;
+        return Math.max(par.getN1(), par.getN2());
     }
     
 //Método calcularPotencia para calcular la potencia del mayor valor de
@@ -59,5 +53,9 @@ public class ParDeNumerosServicio {
         }else {
             System.out.println("La raiz cuadrada de " +  num2 + " = " + Math.sqrt(num2));
         }
+//        System.out.println("BONUS TRACK");
+//        double num = Math.sqrt(par.getN1());
+//        String formato = String.format("%.2f", num);
+//        System.out.println(formato);
     }
 }

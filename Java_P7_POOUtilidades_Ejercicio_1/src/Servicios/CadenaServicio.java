@@ -106,16 +106,14 @@ public class CadenaServicio {
 //una letra que ingresa el usuario y devuelve verdadero si la contiene y
 //falso si no.
     public void contiene(String letrab) {
-        boolean chk = false;
         for (int i = 0; i < c1.getLargo(); i++) {
             if (c1.getFrase().substring(i, i + 1).equals(letrab)) {
                 System.out.println("La frase contiene la letra " + letrab);
-                chk = true;
+                break;
+            }else {
+                System.out.println("La frase no contiene la letra " + letrab);
                 break;
             }
-        }
-        if (chk == false) {
-            System.out.println("La frase no contiene la letra " + letrab);
         }
     }
 }

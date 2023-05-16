@@ -26,7 +26,7 @@ public class Java_P7_POOUtilidades_Ejercicio_1 {
         nueva.Ingresar();
         nueva.mostrarVocales();
         nueva.invertirFrase();
-        System.out.print("Ingrese letra a buscar: ");
+        System.out.print("Ingrese letra a contar: ");
         String letra = leer.next();
         nueva.vecesRepetido(letra);
         System.out.print("Ingrese nueva frase: ");
