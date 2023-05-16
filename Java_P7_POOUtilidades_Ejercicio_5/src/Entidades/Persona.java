@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author recepcal
+ * @author Seba
  */
 public class Persona {
     private String nombre;

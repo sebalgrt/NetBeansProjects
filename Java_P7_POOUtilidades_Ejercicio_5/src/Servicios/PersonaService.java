@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author recepcal
+ * @author Seba
  */
 public class PersonaService {
         Scanner leer = new Scanner(System.in);
@@ -21,31 +21,25 @@ public class PersonaService {
 //nacimiento de la persona a crear. Retornar el objeto Persona creado.
     public Persona crearPersona(){
         System.out.print("Ingrese nombre: ");
-        nueva.setNombre(leer.nextLine());
+        nueva.setNombre(leer.next());
+        String Nombre = nueva.getNombre();
         System.out.print("Ingrese año nacimiento (YYYY): ");
         int anio = leer.nextInt() - 1900;
         System.out.print("Ingrese mes de nacimiento (MM): ");
         int mes = leer.nextInt() - 1;
         System.out.print("Ingrese día de nacimiento (DD): ");
         int dia = leer.nextInt();
-        Date fecha = new Date (anio, mes, dia);
-        nueva.setNacimiento(fecha);
-        return nueva;
-    }
-    
-    // METODO PARA ACCEDER A LOS NOMBRES 
-    public Persona mostrarNombre(PersonaService user) {
-        user.nueva.getNombre();
-        return nueva;
+        Date Fecha = new Date (anio, mes, dia);
+        nueva.setNacimiento(Fecha);
+        return new Persona(Nombre, Fecha);
     }
     
 //Método calcularEdad que calcule la edad del usuario utilizando el
 //atributo de fecha de nacimiento y la fecha actual.
-    public int calcularEdad(Persona crearPersona) {
+    public int calcularEdad(Persona user) {
         int act = new Date().getYear();
-        int nac = crearPersona.getNacimiento().getYear();
+        int nac = user.getNacimiento().getYear();
         int edad = act - nac;
-        System.out.println("La edad es " + edad + " años");
         return edad;
     }
     
@@ -60,10 +54,8 @@ public class PersonaService {
 
 //Método mostrarPersona que muestra la información de la persona
 //deseada.
-    public void mostrarPersona(PersonaService user) {
-        System.out.println("Nombre: " + user.nueva.getNombre());
-        System.out.println("Fecha de nacimiento: " + user.nueva.getNacimiento().toString());
+    public void mostrarPersona(Persona user) {
+        System.out.println("Nombre: " + user.getNombre());
+        System.out.println("Fecha de nacimiento: " + user.getNacimiento().toString());
     }
-
-    
 }

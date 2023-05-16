@@ -6,12 +6,12 @@ en el paquete servicio, con los siguientes métodos:
  */
 package java_p7_pooutilidades_ejercicio_5;
 
+import Entidades.Persona;
 import Servicios.PersonaService;
-import java.util.Scanner;
 
 /**
  *
- * @author recepcal
+ * @author Seba
  */
 public class Java_P7_POOUtilidades_Ejercicio_5 {
 
@@ -19,39 +19,23 @@ public class Java_P7_POOUtilidades_Ejercicio_5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
-        PersonaService user1 = new PersonaService();
-        //user1.crearPersona();
-        user1.calcularEdad(user1.crearPersona());
-        //user1.mostrarPersona(user1);
-        PersonaService user2 = new PersonaService();
-        //user2.crearPersona();
-        user2.calcularEdad(user2.crearPersona());
-        //user2.mostrarPersona(user2);
-        user1.menorQue(user1, user2);
-        System.out.println(comp);
-        if (comp == true) {
-            System.out.println(user1.mostrarNombre(user1).getNombre() + " es mayor que " + user2.mostrarNombre(user2).getNombre());
+        PersonaService nueva = new PersonaService();
+        //CREA PERSONA 1 CON SERVICIO CREARPERSONA
+        Persona user1 = nueva.crearPersona();
+        //CALCULA EDAD
+        System.out.println("Tiene " + nueva.calcularEdad(user1) + " años");
+        //CREA PERSONA 2 CON EL MISMO SERVICIO
+        Persona user2 = nueva.crearPersona();
+        //CALCULA EDAD
+        System.out.println("Tiene " + nueva.calcularEdad(user2) + " años");
+        //COMPARA
+        if (nueva.menorQue(user1, user2) == true) {
+            System.out.println(user2.getNombre() + " es menor que " + user1.getNombre());
         }else {
-            System.out.println(user1.mostrarNombre(user1).getNombre() + " es menor que " + user2.mostrarNombre(user2).getNombre());
+            System.out.println(user2.getNombre() + " es mayor que " + user1.getNombre());
         }
-        int op = 0;
-        do {
-            System.out.println("MOSTRAR DATOS: ");
-            System.out.println("1- Usuario 1");
-            System.out.println("2- Usuario 2");
-            System.out.println("3- Salir");
-            System.out.print("Ingrese opcíón: ");
-            op = leer.nextInt();
-            switch(op) {
-                case 1: user1.mostrarPersona(user1);
-                break;
-                case 2: user2.mostrarPersona(user2);
-                break;
-                case 3: System.out.println("ADIOS!!!");
-                break;
-                default: System.out.println("Opción incorrecta");
-            }
-        } while (op != 3);
+        //MUESTRA
+        nueva.mostrarPersona(user1);
+        nueva.mostrarPersona(user2);
     }
 }
