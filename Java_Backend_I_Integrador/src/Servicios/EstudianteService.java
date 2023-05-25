@@ -22,8 +22,8 @@ public class EstudianteService {
         Estudiante alumno = new Estudiante();       //SE INSTANCIA ADENTO DEL METODO PARA CREAR UN OBJETO ESTUDIANTE CADA VEZ QUE SE INVOQUE
         System.out.print("Ingrese nombre: ");
         alumno.setNombre(leer.next());
-        //System.out.print("Ingrese nota: ");
-        int nota = (int) (Math.random() * 10);      //MANDÉ UN RANDOM PORQUE ME DIÓ PAJA CARGAR LAS NOTAS XD
+        System.out.print("Ingrese nota: ");
+        int nota = leer.nextInt();      //MANDÉ UN RANDOM PORQUE ME DIÓ PAJA CARGAR LAS NOTAS XD
         alumno.setNota(nota);
         return alumno;                              //DEVUELO EL OBJETO ESTUDIANTE EN LA VARIABLE ALUMNO
     }
