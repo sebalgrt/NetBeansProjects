@@ -7,7 +7,6 @@ salir, se mostrará todos los perros guardados en el ArrayList.
 package java_guía10_colecciones_.ejercicio_1;
 
 import Servicios.RazaService;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,9 +24,14 @@ public class Java_Guía10_Colecciones_Ejercicio_1 {
         String resp;
         do {
             nuevo.agregar();
-            System.out.println("Desea guardar otra raza? (S/N): ");
+            System.out.print("Desea guardar otra raza? (S/N): ");
             resp = leer.next();
         } while (!resp.equalsIgnoreCase("n"));
         nuevo.mostrar();
+        nuevo.eliminar();
+        nuevo.mostrar();
+        nuevo.ordenar();
+        nuevo.mostrar();
+        
     }
 }

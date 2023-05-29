@@ -8,6 +8,7 @@ package java_guía10._.colecciones;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -97,5 +98,22 @@ public class Java_Guía10_Colecciones {
         for (Map.Entry<String, String> entrada : persona.entrySet()) {
             System.out.println("Nombre: " + entrada.getKey() + " - Apellido: " + entrada.getValue());
         }
+
+//      ITERADOR
+//
+//      MANOS A LA OBRA - DETECCIÓN DE ERRORES
+        ArrayList<String> bebidas = new ArrayList();
+        bebidas.add("café");
+        bebidas.add("té");
+        Iterator<String> it = bebidas.iterator();
+        while (it.hasNext()){
+            if (it.next().equals("café")){
+            it.remove();
+            }
+        }
+    
+        
     }
+        
+
 }
