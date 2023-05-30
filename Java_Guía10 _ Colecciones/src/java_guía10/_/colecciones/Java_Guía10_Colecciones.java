@@ -125,6 +125,10 @@ public class Java_Guía10_Colecciones {
         for (Libro ejemplar : libro) {
             System.out.println(ejemplar.toString());
         }
+        Iterator ite = libro.iterator();
+        while (ite.hasNext()) {
+            System.out.println(ite.next().toString());
+        }
     }
         
 
