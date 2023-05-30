@@ -30,20 +30,27 @@ public class RazaService {
         for (String raza : razas) {
             System.out.println(raza);
         }
+//        Iterator it = razas.iterator();
+//        while (it.hasNext()) {
+//            System.out.println(it.next());
+//        }
     }
 
     public void eliminar() {
-        Iterator<String> it = razas.iterator();
         System.out.print("Que raza desea eliminar?: ");
         String del = leer.next();
+        Iterator<String> it = razas.iterator();
+        boolean conf = true;
         while (it.hasNext()) {
-            if (it.next().equalsIgnoreCase(del))
+            if (it.next().equals(del)){
                 it.remove();
+                conf = false;
+            }
         }
-    }
-
-    public void ordenar() {
+        if (conf) {
+            System.out.println("La raza " + del + " no se encuentra en la lista");
+        }
         Collections.sort(razas);
     }
-    
+
 }

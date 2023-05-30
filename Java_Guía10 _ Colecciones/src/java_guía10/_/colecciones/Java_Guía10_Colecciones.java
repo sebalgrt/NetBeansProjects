@@ -5,6 +5,7 @@
  */
 package java_guía10._.colecciones;
 
+import Entidades.Libro;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -112,7 +113,18 @@ public class Java_Guía10_Colecciones {
             }
         }
     
-        
+//      EJERCICIO LISTA LIBROS
+//      ¡Es tu turno! Crea una lista de Libros y muestra el título de cada uno 
+//      con un bucle
+        ArrayList<Libro> libro = new ArrayList();
+        for (int i = 0; i < 3; i++) {
+            Libro nuevo = new Libro();
+            nuevo.agregar();
+            libro.add(nuevo);
+        }
+        for (Libro ejemplar : libro) {
+            System.out.println(ejemplar.toString());
+        }
     }
         
 
