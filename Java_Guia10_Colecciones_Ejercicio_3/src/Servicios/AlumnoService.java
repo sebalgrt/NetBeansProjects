@@ -49,7 +49,8 @@ public class AlumnoService {
         boolean conf = true;
         for (Alumno aux : curso) {
             if (aux.getNombre().equals(busq)) {
-                System.out.println("El promedio de " + busq + " es: " + notaFinal(aux.getNotas()));
+                double prom = notaFinal(aux.getNotas());
+                System.out.println("El promedio de " + busq + " es: " + prom);
                 conf = false;
             }
         }
