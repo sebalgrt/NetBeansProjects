@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Java_G11_Relaciones_Ej_ Guia">
+  <ClassDiagramComponents>
+    <Class name="Dni" package="Entidades" visibility="public" xPosition="434.0" yPosition="145.0">
+      <Fields>
+        <Field name="letra" type="char" visibility="private"/>
+        <Field name="numero" type="long" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="char" name="letra"/>
+          <Argument type="long" name="numero"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setLetra" returnType="void" visibility="public">
+          <Argument type="char" name="letra"/>
+        </Method>
+        <Method name="setNumero" returnType="void" visibility="public">
+          <Argument type="long" name="numero"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Persona" package="Entidades" visibility="public" xPosition="12.0" yPosition="126.0">
+      <Fields>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="numero" type="Dni" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="Dni" name="numero"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="setNumero" returnType="void" visibility="public">
+          <Argument type="Dni" name="numero"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Java_G11_Relaciones_Ej_Guia" package="java_g11_relaciones_ej_.guia" visibility="public" xPosition="12.0" yPosition="4.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="Entidades.Persona" target="Entidades.Dni" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="numero" source="Entidades.Persona" target="Entidades.Dni" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
