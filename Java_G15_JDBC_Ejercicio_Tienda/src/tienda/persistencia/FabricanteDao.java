@@ -16,10 +16,10 @@ public final class FabricanteDao extends DAO {
     public void ingresarFab(Fabricante fab) throws Exception {
         try {
             if (fab == null) {
-                throw new Exception ("Debe indicar un nombre");
+                throw new Exception ("No se ingresaron datos");
             }
             String sql = "INSERT INTO fabricante VALUES (" + fab.getCodigo() + ", '" + 
-                    fab.getNombre() + ";";
+                    fab.getNombre() + "');";
             insModDel(sql);
         } catch (Exception e) {
             throw e;
