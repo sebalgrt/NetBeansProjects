@@ -108,9 +108,9 @@ public class Java_G16_JPA_Ejercicio_Libreria {
                         switch (opf) {
                             case 1: libro.buscar();
                             break;
-                            case 2:
+                            case 2: autor.buscar();
                             break;
-                            case 3:
+                            case 3: editorial.buscar();
                             break;
                             case 4: System.out.println("");
                             break;

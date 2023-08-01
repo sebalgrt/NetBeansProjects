@@ -30,18 +30,25 @@ public class LibroService {
         try {
             System.out.print("Ingrese titulo: ");
             String titulo = leer.next();
-            System.out.print("Ingrese año: ");
-            Integer anio = leer.nextInt();
-            System.out.print("Ingrese cantidad de ejemplares: ");
-            Integer ejemp = leer.nextInt();
-            Autor autor = autorS.crear();
-            Editorial editorial = editorialS.crear();
-            Libro libro = new Libro(titulo, anio, ejemp, autor, editorial);
-            em.getTransaction().begin();
-            em.persist(libro);
-            em.getTransaction().commit();
-            System.out.println("Libro creado correctamente");
-            System.out.println("");
+            libros = em.createQuery("SELECT a FROM Libro a WHERE a.titulo LIKE :tit")
+                        .setParameter("tit", titulo).getResultList();
+            if (libros.size() == 0) {
+                System.out.print("Ingrese año: ");
+                Integer anio = leer.nextInt();
+                System.out.print("Ingrese cantidad de ejemplares: ");
+                Integer ejemp = leer.nextInt();
+                Autor autor = autorS.crear();
+                Editorial editorial = editorialS.crear();
+                Libro libro = new Libro(titulo, anio, ejemp, autor, editorial);
+                em.getTransaction().begin();
+                em.persist(libro);
+                em.getTransaction().commit();
+                System.out.println("Libro creado correctamente");
+                System.out.println("");
+            } else {
+                System.out.println("El titulo ya está creado");
+                System.out.println("");
+            }
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
             leer.nextLine();
@@ -98,8 +105,9 @@ public class LibroService {
             if (buscar.equalsIgnoreCase("*")) {
                 libros = em.createQuery("SELECT a FROM Libro a").getResultList();
             } else {
-                libros = em.createQuery("SELECT a FROM Libro a WHERE a.titulo LIKE :'%tit%'")
-                        .setParameter("%tit%", buscar).getResultList();
+                buscar = "%" + buscar + "%";
+                libros = em.createQuery("SELECT a FROM Libro a WHERE a.titulo LIKE :tit")
+                        .setParameter("tit", buscar).getResultList();
             }
             for (Libro aux : libros) {
                 System.out.println(aux.getIsbn() + " " + aux.getTitulo() + " " + 
@@ -108,6 +116,7 @@ public class LibroService {
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
+            System.out.println(e);
             leer.nextLine();
         }
     }

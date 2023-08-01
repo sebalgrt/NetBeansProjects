@@ -5,6 +5,8 @@
  */
 package java_g16_jpa_ejercicio_libreria.Servicios;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java_g16_jpa_ejercicio_libreria.Entidades.Editorial;
 import javax.persistence.EntityManager;
@@ -17,17 +19,26 @@ import javax.persistence.Persistence;
 public class EditorialService {
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
     EntityManager em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+    List<Editorial> editoriales = new ArrayList();
 
     public Editorial crear() {
         Editorial nueva = new Editorial();
         try {
             System.out.print("Ingrese editorial: ");
-            nueva.setNombre(leer.nextLine());
-            em.getTransaction().begin();
-            em.persist(nueva);
-            em.getTransaction().commit();
-            System.out.println("Editorial creada correctamente");
-            System.out.println("");
+            String nombre = leer.next();
+            nueva.setNombre(nombre);
+            editoriales = em.createQuery("SELECT a FROM Editorial a WHERE a.nombre LIKE :tit")
+                        .setParameter("tit", nombre).getResultList();
+            if (editoriales.size() == 0) {
+                em.getTransaction().begin();
+                em.persist(nueva);
+                em.getTransaction().commit();
+                System.out.println("Editorial creada correctamente");
+                System.out.println("");
+            } else {
+                System.out.println("Editorial existente");
+                System.out.println("");
+            }
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
             leer.nextLine();
@@ -69,6 +80,28 @@ public class EditorialService {
             leer.nextLine();
         }
         return editorial;
+    }
+
+    public void buscar() {
+        try {
+            System.out.print("Ingrese editorial a buscar o * para ver todos: ");
+            String buscar = leer.next();
+            if (buscar.equalsIgnoreCase("*")) {
+                editoriales = em.createQuery("SELECT a FROM Editorial a").getResultList();
+            } else {
+                buscar = "%" + buscar + "%";
+                editoriales = em.createQuery("SELECT a FROM Editorial a WHERE a.nombre LIKE :tit")
+                        .setParameter("tit", buscar).getResultList();
+            }
+            for (Editorial aux : editoriales) {
+                System.out.println(aux.getId() + " " + aux.getNombre());
+            }
+            System.out.println("");
+        } catch (Exception e) {
+            System.out.println("ERROR! Dato incorrecto");
+            System.out.println(e);
+            leer.nextLine();
+        }
     }
     
 }
