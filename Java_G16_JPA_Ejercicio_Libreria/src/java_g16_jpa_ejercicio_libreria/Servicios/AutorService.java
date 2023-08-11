@@ -5,12 +5,11 @@
  */
 package java_g16_jpa_ejercicio_libreria.Servicios;
 
+import DAO.AutorDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java_g16_jpa_ejercicio_libreria.Entidades.Autor;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -18,7 +17,7 @@ import javax.persistence.Persistence;
  */
 public class AutorService {
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    EntityManager em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+    AutorDAO adao = new AutorDAO();
     List<Autor> autores = new ArrayList();
     
     public Autor crear() {
@@ -27,18 +26,7 @@ public class AutorService {
             System.out.print("Ingrese autor: ");
             String nombre = leer.next();
             nuevo.setNombre(nombre);
-            autores = em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nom")
-                        .setParameter("nom", nombre).getResultList();
-            if (autores.size() == 0) {
-                em.getTransaction().begin();
-                em.persist(nuevo);
-                em.getTransaction().commit();
-                System.out.println("Autor creado correctamente");
-                System.out.println("");
-            } else {
-                System.out.println("Autor existente");
-                System.out.println("");
-            }
+            adao.crear(nuevo);
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
             leer.nextLine();
@@ -50,11 +38,8 @@ public class AutorService {
         try {
             System.out.print("Ingrese ID del autor: ");
             int id = leer.nextInt();
-            Autor autor = em.find(Autor.class, id);
-            em.getTransaction().begin();
-            em.remove(autor);
-            em.getTransaction().commit();
-            System.out.println("Autor borrado correctamente");
+            Autor autor = adao.buscarAutorID(id);
+            adao.borrar(autor);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -67,13 +52,10 @@ public class AutorService {
         try {
             System.out.print("Ingrese ID del autor: ");
             int id = leer.nextInt();
-            autor = em.find(Autor.class, id);
+            autor = adao.buscarAutorID(id);
             System.out.print("Ingrese nuevo autor: ");
             autor.setNombre(leer.next());
-            em.getTransaction().begin();
-            em.merge(autor);
-            em.getTransaction().commit();
-            System.out.println("El autor se modificó correctamente");
+            adao.modificar(autor);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -84,18 +66,31 @@ public class AutorService {
 
     public void buscar() {
          try {
-            System.out.print("Ingrese autor a buscar o * para ver todos: ");
-            String buscar = leer.next();
-            if (buscar.equalsIgnoreCase("*")) {
-                autores = em.createQuery("SELECT a FROM Autor a").getResultList();
-            } else {
-                buscar = "%" + buscar + "%";
-                autores = em.createQuery("SELECT a FROM Autor a WHERE a.nombre LIKE :nom")
-                        .setParameter("nom", buscar).getResultList();
-            }
-            for (Autor aux : autores) {
-                System.out.println(aux.getId() + " " + aux.getNombre());
-            }
+            System.out.println("1- Buscar por ID");
+            System.out.println("2- Buscar por nombre");
+            System.out.println("3- Mostrar todos");
+            System.out.print("Ingrese opción: ");
+            int op = leer.nextInt();
+            switch (op) {
+                case 1: 
+                    System.out.print("Ingrese ID: ");
+                    Autor autor = adao.buscarAutorID(leer.nextInt());
+                    System.out.println(autor.getId() + " - " + autor.getNombre());
+                    break;
+                case 2:
+                    System.out.print("Ingrese nombre (o parte): ");
+                    autores = adao.buscarAutorNombre(leer.next());
+                    for (Autor aux : autores) {
+                        System.out.println(aux.getId() + " - " + aux.getNombre());
+                    }
+                    break;
+                case 3:
+                    autores = adao.mostrarAutores();
+                    for (Autor aux : autores) {
+                        System.out.println(aux.getId() + " - " + aux.getNombre());
+                    }
+                    break;
+             }
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");

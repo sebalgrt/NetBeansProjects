@@ -5,6 +5,8 @@
     <class>java_g16_jpa_ejercicio_libreria.Entidades.Autor</class>
     <class>java_g16_jpa_ejercicio_libreria.Entidades.Editorial</class>
     <class>java_g16_jpa_ejercicio_libreria.Entidades.Libro</class>
+    <class>java_g16_jpa_ejercicio_libreria.Entidades.Cliente</class>
+    <class>java_g16_jpa_ejercicio_libreria.Entidades.Prestamo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/libreria?useSSL=False"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

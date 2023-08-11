@@ -5,12 +5,11 @@
  */
 package java_g16_jpa_ejercicio_libreria.Servicios;
 
+import DAO.EditorialDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java_g16_jpa_ejercicio_libreria.Entidades.Editorial;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -18,7 +17,7 @@ import javax.persistence.Persistence;
  */
 public class EditorialService {
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    EntityManager em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+    EditorialDAO edao = new EditorialDAO();
     List<Editorial> editoriales = new ArrayList();
 
     public Editorial crear() {
@@ -27,18 +26,7 @@ public class EditorialService {
             System.out.print("Ingrese editorial: ");
             String nombre = leer.next();
             nueva.setNombre(nombre);
-            editoriales = em.createQuery("SELECT a FROM Editorial a WHERE a.nombre LIKE :tit")
-                        .setParameter("tit", nombre).getResultList();
-            if (editoriales.size() == 0) {
-                em.getTransaction().begin();
-                em.persist(nueva);
-                em.getTransaction().commit();
-                System.out.println("Editorial creada correctamente");
-                System.out.println("");
-            } else {
-                System.out.println("Editorial existente");
-                System.out.println("");
-            }
+            edao.crear(nueva);
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
             leer.nextLine();
@@ -50,11 +38,8 @@ public class EditorialService {
         try {
             System.out.print("Ingrese ID de la editorial: ");
             int id = leer.nextInt();
-            Editorial editorial = em.find(Editorial.class, id);
-            em.getTransaction().begin();
-            em.remove(editorial);
-            em.getTransaction().commit();
-            System.out.println("Editorial borrada correctamente");
+            Editorial editorial = edao.buscarEditorialID(id);
+            edao.borrar(editorial);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -67,13 +52,10 @@ public class EditorialService {
         try {
             System.out.print("Ingrese ID de la editorial: ");
             int id = leer.nextInt();
-            editorial = em.find(Editorial.class, id);
+            editorial = edao.buscarEditorialID(id);
             System.out.print("Ingrese nueva editorial: ");
             editorial.setNombre(leer.next());
-            em.getTransaction().begin();
-            em.merge(editorial);
-            em.getTransaction().commit();
-            System.out.println("La editorial se modificó correctamente");
+            edao.modificar(editorial);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -83,19 +65,32 @@ public class EditorialService {
     }
 
     public void buscar() {
-        try {
-            System.out.print("Ingrese editorial a buscar o * para ver todos: ");
-            String buscar = leer.next();
-            if (buscar.equalsIgnoreCase("*")) {
-                editoriales = em.createQuery("SELECT a FROM Editorial a").getResultList();
-            } else {
-                buscar = "%" + buscar + "%";
-                editoriales = em.createQuery("SELECT a FROM Editorial a WHERE a.nombre LIKE :tit")
-                        .setParameter("tit", buscar).getResultList();
-            }
-            for (Editorial aux : editoriales) {
-                System.out.println(aux.getId() + " " + aux.getNombre());
-            }
+         try {
+            System.out.println("1- Buscar por ID");
+            System.out.println("2- Buscar por nombre");
+            System.out.println("3- Mostrar todos");
+            System.out.print("Ingrese opción: ");
+            int op = leer.nextInt();
+            switch (op) {
+                case 1: 
+                    System.out.print("Ingrese ID: ");
+                    Editorial editorial = edao.buscarEditorialID(leer.nextInt());
+                    System.out.println(editorial.getId() + " - " + editorial.getNombre());
+                    break;
+                case 2:
+                    System.out.print("Ingrese nombre (o parte): ");
+                    editoriales = edao.buscarEditorialNombre(leer.next());
+                    for (Editorial aux : editoriales) {
+                        System.out.println(aux.getId() + " - " + aux.getNombre());
+                    }
+                    break;
+                case 3:
+                    editoriales = edao.mostrarEditoriales();
+                    for (Editorial aux : editoriales) {
+                        System.out.println(aux.getId() + " - " + aux.getNombre());
+                    }
+                    break;
+             }
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -103,5 +98,4 @@ public class EditorialService {
             leer.nextLine();
         }
     }
-    
 }

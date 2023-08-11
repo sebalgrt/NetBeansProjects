@@ -5,15 +5,13 @@
  */
 package java_g16_jpa_ejercicio_libreria.Servicios;
 
+import DAO.LibroDAO;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Scanner;
 import java_g16_jpa_ejercicio_libreria.Entidades.Autor;
 import java_g16_jpa_ejercicio_libreria.Entidades.Editorial;
 import java_g16_jpa_ejercicio_libreria.Entidades.Libro;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -21,7 +19,7 @@ import javax.persistence.Persistence;
  */
 public class LibroService {
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    EntityManager em = Persistence.createEntityManagerFactory("LibreriaPU").createEntityManager();
+    LibroDAO ldao = new LibroDAO();
     AutorService autorS = new AutorService();
     EditorialService editorialS = new EditorialService();
     List<Libro> libros = new ArrayList();
@@ -30,25 +28,15 @@ public class LibroService {
         try {
             System.out.print("Ingrese titulo: ");
             String titulo = leer.next();
-            libros = em.createQuery("SELECT a FROM Libro a WHERE a.titulo LIKE :tit")
-                        .setParameter("tit", titulo).getResultList();
-            if (libros.size() == 0) {
-                System.out.print("Ingrese año: ");
-                Integer anio = leer.nextInt();
-                System.out.print("Ingrese cantidad de ejemplares: ");
-                Integer ejemp = leer.nextInt();
-                Autor autor = autorS.crear();
-                Editorial editorial = editorialS.crear();
-                Libro libro = new Libro(titulo, anio, ejemp, autor, editorial);
-                em.getTransaction().begin();
-                em.persist(libro);
-                em.getTransaction().commit();
-                System.out.println("Libro creado correctamente");
-                System.out.println("");
-            } else {
-                System.out.println("El titulo ya está creado");
-                System.out.println("");
-            }
+            System.out.print("Ingrese año: ");
+            Integer anio = leer.nextInt();
+            System.out.print("Ingrese cantidad de ejemplares: ");
+            Integer ejemp = leer.nextInt();
+            Autor autor = autorS.crear();
+            Editorial editorial = editorialS.crear();
+            Libro libro = new Libro(titulo, anio, ejemp, autor, editorial);
+            ldao.crear(libro);
+            System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
             leer.nextLine();
@@ -59,11 +47,8 @@ public class LibroService {
         try {
             System.out.print("Ingrese ISBN del libro a borrar: ");
             long id = leer.nextLong();
-            Libro libro = em.find(Libro.class, id);
-            em.getTransaction().begin();
-            em.remove(libro);
-            em.getTransaction().commit();
-            System.out.println("Libro borrado correctamente");
+            Libro libro = ldao.buscarLibroISBN(id);
+            ldao.borrar(libro);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -75,21 +60,18 @@ public class LibroService {
         try {
             System.out.print("Ingrese ISBN del libro a modificar: ");
             long isbn = leer.nextLong();
-            Libro libro = em.find(Libro.class, isbn);
-            System.out.print("Ingrese titulo: ");
+            Libro libro = ldao.buscarLibroISBN(isbn);
+            System.out.print("Ingrese nuevo titulo: ");
             libro.setTitulo(leer.next());
-            System.out.print("Ingrese año: ");
+            System.out.print("Ingrese nuevo año: ");
             libro.setAnio(leer.nextInt());
-            System.out.print("Ingrese cantidad de ejemplares: ");
+            System.out.print("Ingrese nueva cantidad de ejemplares: ");
             libro.setEjemplares(leer.nextInt());
             Autor autor = autorS.modificar();
             libro.setAutor(autor);
             Editorial editorial = editorialS.modificar();
             libro.setEditorial(editorial);
-            em.getTransaction().begin();
-            em.merge(libro);
-            em.getTransaction().commit();
-            System.out.println("El libro se modificó correctamente");
+            ldao.modificar(libro);
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -97,22 +79,40 @@ public class LibroService {
         }
         
     }
-
+    
     public void buscar() {
-        try {
-            System.out.print("Ingrese titulo a buscar o * para ver todo: ");
-            String buscar = leer.next();
-            if (buscar.equalsIgnoreCase("*")) {
-                libros = em.createQuery("SELECT a FROM Libro a").getResultList();
-            } else {
-                buscar = "%" + buscar + "%";
-                libros = em.createQuery("SELECT a FROM Libro a WHERE a.titulo LIKE :tit")
-                        .setParameter("tit", buscar).getResultList();
-            }
-            for (Libro aux : libros) {
-                System.out.println(aux.getIsbn() + " " + aux.getTitulo() + " " + 
-                        aux.getAutor().getNombre() + " " + aux.getEditorial().getNombre());
-            }
+         try {
+            System.out.println("1- Buscar por ISBN");
+            System.out.println("2- Buscar por nombre");
+            System.out.println("3- Mostrar todos");
+            System.out.print("Ingrese opción: ");
+            int op = leer.nextInt();
+            switch (op) {
+                case 1: 
+                    System.out.print("Ingrese ISBN: ");
+                    Libro libro = ldao.buscarLibroISBN(leer.nextLong());
+                    System.out.println(libro.getIsbn() + " - " + libro.getTitulo() + 
+                            " - " + libro.getAutor().getNombre() + " - " + 
+                            libro.getEditorial().getNombre());
+                    break;
+                case 2:
+                    System.out.print("Ingrese nombre (o parte): ");
+                    libros = ldao.buscarLibroNombre(leer.next());
+                    for (Libro aux : libros) {
+                        System.out.println(aux.getIsbn() + " - " + aux.getTitulo() + 
+                            " - " + aux.getAutor().getNombre() + " - " + 
+                            aux.getEditorial().getNombre());
+                    }
+                    break;
+                case 3:
+                    libros = ldao.mostrarLibros();
+                    for (Libro aux : libros) {
+                        System.out.println(aux.getIsbn() + " - " + aux.getTitulo() + 
+                            " - " + aux.getAutor().getNombre() + " - " + 
+                            aux.getEditorial().getNombre());
+                    }
+                    break;
+             }
             System.out.println("");
         } catch (Exception e) {
             System.out.println("ERROR! Dato incorrecto");
@@ -120,5 +120,5 @@ public class LibroService {
             leer.nextLine();
         }
     }
-    
+
 }
